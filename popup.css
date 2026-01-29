@@ -506,8 +506,8 @@ body {
   gap: 6px;
   margin-bottom: 12px;
   padding: 8px;
-  background: #fff3cd;
-  border-radius: 6px;
+  background: #1a1a1a
+  border-radius 6px;
   flex-wrap: wrap;
 }
 
@@ -527,12 +527,12 @@ body {
 }
 
 .btn-danger {
-  background: #fee !important;
+  background: rgb(255, 0, 0) !important;
   color: #c33;
 }
 
 .btn-danger:hover {
-  background: #fdd !important;
+  background: rgb(255, 0, 0) !important;
 }
 
 /* Action buttons enhancements */
