@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmark Organizer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body data-theme="light">
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1>📚 Bookmark Organizer</h1>
+        <h2>Organize your bookmarks efficiently</h2>
+        <h3>Created by Mr.H1deZ</h3>
+        <div class="header-actions">
+          <button id="darkModeToggle" class="icon-btn" title="Toggle dark mode">🌙</button>
+          <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+        </div>
+      </div>
+      <div class="stats">
+        <span id="bookmarkCount">0 bookmarks</span>
+        <span id="selectedCount" class="hidden"> • <strong>0 selected</strong></span>
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls">
+      <!-- Search with Advanced Options -->
+      <div class="search-box">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Search by name, domain, tags, or notes..."
+          autocomplete="off"
+        >
+        <button id="advancedSearchBtn" class="icon-btn-small" title="Advanced search">🔍</button>
+      </div>
+      
+      <!-- Advanced Search Panel (hidden by default) -->
+      <div id="advancedSearchPanel" class="advanced-panel hidden">
+        <div class="advanced-row">
+          <label>
+            <input type="checkbox" id="useRegex"> Use Regular Expression
+          </label>
+          <label>
+            <input type="checkbox" id="favoritesOnly"> Favorites Only ⭐
+          </label>
+        </div>
+        <div class="advanced-row">
+          <div class="date-range">
+            <label>Date From: <input type="date" id="dateFrom"></label>
+            <label>Date To: <input type="date" id="dateTo"></label>
+          </div>
+        </div>
+        <div class="advanced-row">
+          <div class="usage-range">
+            <label>Usage Min: <input type="number" id="usageMin" min="0" placeholder="0"></label>
+            <label>Usage Max: <input type="number" id="usageMax" min="0" placeholder="∞"></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tag Filter -->
+      <div id="tagFilterContainer" class="tag-filter hidden">
+        <span class="tag-filter-label">Filtered by tags:</span>
+        <div id="activeTagFilters" class="active-tag-filters"></div>
+        <button id="clearTagFilters" class="btn-link">Clear</button>
+      </div>
+
+      <!-- Filters and Sort -->
+      <div class="filter-sort">
+        <select id="fileTypeFilter">
+          <option value="">All File Types</option>
+          <option value="pdf">PDF</option>
+          <option value="zip">ZIP</option>
+          <option value="exe">EXE</option>
+          <option value="dmg">DMG</option>
+          <option value="doc">DOC</option>
+          <option value="docx">DOCX</option>
+          <option value="xls">XLS</option>
+          <option value="xlsx">XLSX</option>
+          <option value="jpg">JPG</option>
+          <option value="png">PNG</option>
+          <option value="mp4">MP4</option>
+          <option value="mp3">MP3</option>
+          <option value="page">Page</option>
+          <option value="unknown">Other</option>
+        </select>
+
+        <select id="folderFilter">
+          <option value="">All Folders</option>
+          <!-- Dynamically populated -->
+        </select>
+
+        <select id="sortBy">
+          <option value="dateAdded">Date Added (Newest)</option>
+          <option value="dateAddedOld">Date Added (Oldest)</option>
+          <option value="name">Name (A-Z)</option>
+          <option value="nameDesc">Name (Z-A)</option>
+          <option value="usage">Most Used</option>
+          <option value="domain">Domain (A-Z)</option>
+        </select>
+      </div>
+
+      <!-- Bulk Actions (hidden by default) -->
+      <div id="bulkActions" class="bulk-actions hidden">
+        <button id="bulkSelectAll" class="btn-small">Select All</button>
+        <button id="bulkDeselectAll" class="btn-small">Deselect All</button>
+        <button id="bulkDelete" class="btn-small btn-danger">Delete Selected</button>
+        <button id="bulkAddTag" class="btn-small">Add Tag</button>
+        <button id="bulkSetFolder" class="btn-small">Set Folder</button>
+        <button id="bulkExport" class="btn-small">Export Selected</button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="saveCurrentPageBtn" title="Save current page as bookmark" class="btn-primary">💾 Save Page</button>
+        <button id="manageFoldersBtn" title="Manage folders">📁 Folders</button>
+        <button id="toggleBulkMode" title="Bulk selection mode">☑️ Bulk</button>
+        <button id="statsBtn" title="View statistics">📊 Stats</button>
+        <button id="exportBtn" title="Export bookmarks">📤 Export</button>
+        <button id="importBtn" title="Import bookmarks">📥 Import</button>
+        <button id="clearBtn" title="Clear all bookmarks">🗑️ Clear All</button>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div style="display: flex; gap: 8px; flex: 1; overflow: hidden;">
+      
+      <!-- Folders Sidebar -->
+      <div id="foldersSidebar" class="folders-sidebar">
+        <div class="folders-header">📁 FOLDERS</div>
+        <button class="folder-item active" data-folder="">
+          📂 All Bookmarks
+        </button>
+        <div id="folderItemsContainer"></div>
+      </div>
+
+      <!-- Bookmarks List with Virtual Scrolling -->
+      <div class="bookmarks-container" id="bookmarksContainer" style="flex: 1;">
+        <div class="bookmarks-list" id="bookmarksList"></div>
+      </div>
+    
+    </div>
+
+    <!-- Bookmarks List with Virtual Scrolling -->
+    <div class="bookmarks-container" id="bookmarksContainer" style="display: none;">
+      <div class="bookmarks-list" id="bookmarksList"></div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState">
+      <p>No bookmarks yet.</p>
+      <p>Right-click any link and select "Save Link as Bookmark"</p>
+      <p>Or use <kbd>Ctrl+Shift+S</kbd> (customize in extensions settings)</p>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  
+  <!-- Edit Bookmark Modal -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Bookmark</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Title:</label>
+          <input type="text" id="editTitle" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Folder:</label>
+          <select id="editFolder" class="form-input">
+            <option value="">No Folder</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tags:</label>
+          <div class="tag-input-container">
+            <div id="editTagsDisplay" class="tags-display"></div>
+            <input type="text" id="editTagInput" class="form-input" placeholder="Add tag and press Enter">
+          </div>
+          <div id="tagSuggestions" class="tag-suggestions"></div>
+        </div>
+        <div class="form-group">
+          <label>Notes:</label>
+          <textarea id="editNotes" class="form-textarea" rows="3" placeholder="Add notes..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="editFavorite"> Favorite ⭐
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveEdit" class="btn-primary">Save</button>
+        <button class="modal-close btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Modal -->
+  <div id="statsModal" class="modal hidden">
+    <div class="modal-content modal-wide">
+      <div class="modal-header">
+        <h2>📊 Statistics</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="statsContent"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-close btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Folder Management Modal -->
+  <div id="foldersModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Manage Folders</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Create New Folder:</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="newFolderInput" class="form-input" placeholder="Enter folder name">
+            <button id="createFolderBtn" class="btn-primary">Create</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Existing Folders:</label>
+          <div id="foldersListDisplay" style="max-height: 200px; overflow-y: auto;">
+            <!-- Folders will be listed here -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-close btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Bookmark Modal -->
+  <div id="saveBookmarkModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Save Bookmark</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Title:</label>
+          <input type="text" id="saveTitle" class="form-input" placeholder="Bookmark title">
+        </div>
+        <div class="form-group">
+          <label>Folder (optional):</label>
+          <select id="saveFolderSelect" class="form-input">
+            <option value="">No Folder</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tags (optional):</label>
+          <input type="text" id="saveTags" class="form-input" placeholder="Comma-separated tags">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirmSave" class="btn-primary">Save</button>
+        <button class="modal-close btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>⚙️ Settings</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Theme:</label>
+          <select id="themeSelect" class="form-input">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto (System)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Default Sort:</label>
+          <select id="defaultSort" class="form-input">
+            <option value="dateAdded">Date Added (Newest)</option>
+            <option value="dateAddedOld">Date Added (Oldest)</option>
+            <option value="name">Name (A-Z)</option>
+            <option value="nameDesc">Name (Z-A)</option>
+            <option value="usage">Most Used</option>
+            <option value="domain">Domain (A-Z)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Auto-backup:</label>
+          <label>
+            <input type="checkbox" id="autoBackup"> Enable automatic backup (weekly)
+          </label>
+        </div>
+        <div class="form-group">
+          <button id="exportSettingsBtn" class="btn-secondary">Export All Data</button>
+          <button id="importSettingsBtn" class="btn-secondary">Import Data</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveSettings" class="btn-primary">Save</button>
+        <button class="modal-close btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file inputs -->
+  <input type="file" id="fileInput" accept=".json" style="display: none;">
+  <input type="file" id="importDataInput" accept=".json" style="display: none;">
+  <input type="file" id="importCsvInput" accept=".csv" style="display: none;">
+  <input type="file" id="importHtmlInput" accept=".html" style="display: none;">
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

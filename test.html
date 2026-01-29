@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookmark Organizer - Test Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+    
+    .section {
+      margin-bottom: 40px;
+    }
+    
+    .section h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      font-size: 24px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+    
+    .instruction {
+      background: #f0f4ff;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    
+    .instruction strong {
+      color: #667eea;
+    }
+    
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .link-card {
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 15px;
+      transition: all 0.2s;
+    }
+    
+    .link-card:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .link-card .icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .link-card .title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .link-card a {
+      color: #667eea;
+      text-decoration: none;
+      font-size: 14px;
+      word-break: break-all;
+    }
+    
+    .link-card a:hover {
+      text-decoration: underline;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: #667eea;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+    
+    .steps {
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .steps ol {
+      margin-left: 20px;
+    }
+    
+    .steps li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    
+    kbd {
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+    
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Bookmark Organizer Test Page</h1>
+    <p class="subtitle">Use this page to test your browser extension</p>
+    
+    <!-- Instructions -->
+    <div class="section">
+      <h2>🎯 How to Test</h2>
+      <div class="steps">
+        <ol>
+          <li><strong>Right-click</strong> any link below and select <strong>"Save Link as Bookmark"</strong></li>
+          <li>Or hover over a link and press <kbd>Ctrl+Shift+S</kbd> (or your custom shortcut)</li>
+          <li>Click the extension icon or press <kbd>Ctrl+Shift+B</kbd> to open the organizer</li>
+          <li>Try searching, filtering, and sorting your bookmarks</li>
+          <li>Test the export and import features</li>
+        </ol>
+      </div>
+      
+      <div class="instruction">
+        <strong>💡 Pro Tip:</strong> Save the same link twice to test duplicate detection!
+      </div>
+    </div>
+    
+    <!-- PDF Links -->
+    <div class="section">
+      <h2>📄 PDF Documents</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <div class="icon">📄</div>
+          <div class="title">Sample PDF</div>
+          <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">dummy.pdf</a>
+          <div><span class="badge">PDF</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">📑</div>
+          <div class="title">Lorem Ipsum</div>
+          <a href="https://www.africau.edu/images/default/sample.pdf">sample.pdf</a>
+          <div><span class="badge">PDF</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">📋</div>
+          <div class="title">Test Document</div>
+          <a href="https://pdfobject.com/pdf/sample.pdf">test-sample.pdf</a>
+          <div><span class="badge">PDF</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Archive Files -->
+    <div class="section">
+      <h2>🗜️ Archive Files</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <div class="icon">🗜️</div>
+          <div class="title">Sample Archive</div>
+          <a href="https://example.com/downloads/sample.zip">sample.zip</a>
+          <div><span class="badge">ZIP</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">📦</div>
+          <div class="title">Data Archive</div>
+          <a href="https://example.com/files/data-backup.rar">data-backup.rar</a>
+          <div><span class="badge">RAR</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">🗂️</div>
+          <div class="title">Project Files</div>
+          <a href="https://example.com/projects/project.7z">project.7z</a>
+          <div><span class="badge">7Z</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Executable Files -->
+    <div class="section">
+      <h2>⚙️ Executable Files</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <div class="icon">⚙️</div>
+          <div class="title">Windows Installer</div>
+          <a href="https://example.com/software/setup.exe">setup.exe</a>
+          <div><span class="badge">EXE</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">💿</div>
+          <div class="title">Mac Installer</div>
+          <a href="https://example.com/software/app-installer.dmg">app-installer.dmg</a>
+          <div><span class="badge">DMG</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">🐧</div>
+          <div class="title">Linux Package</div>
+          <a href="https://example.com/software/package.deb">package.deb</a>
+          <div><span class="badge">DEB</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Office Documents -->
+    <div class="section">
+      <h2>📝 Office Documents</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <div class="icon">📝</div>
+          <div class="title">Word Document</div>
+          <a href="https://example.com/docs/report.docx">report.docx</a>
+          <div><span class="badge">DOCX</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">📊</div>
+          <div class="title">Excel Spreadsheet</div>
+          <a href="https://example.com/data/spreadsheet.xlsx">spreadsheet.xlsx</a>
+          <div><span class="badge">XLSX</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">📽️</div>
+          <div class="title">PowerPoint</div>
+          <a href="https://example.com/presentations/slides.pptx">slides.pptx</a>
+          <div><span class="badge">PPTX</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Media Files -->
+    <div class="section">
+      <h2>🎬 Media Files</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <div class="icon">🎬</div>
+          <div class="title">Video File</div>
+          <a href="https://example.com/videos/tutorial.mp4">tutorial.mp4</a>
+          <div><span class="badge">MP4</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">🎵</div>
+          <div class="title">Audio Track</div>
+          <a href="https://example.com/audio/song.mp3">song.mp3</a>
+          <div><span class="badge">MP3</span></div>
+        </div>
+        <div class="link-card">
+          <div class="icon">🖼️</div>
+          <div class="title">Image File</div>
+          <a href="https://example.com/images/photo.jpg">photo.jpg</a>
+          <div><span class="badge">JPG</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Test Cases -->
+    <div class="section">
+      <h2>🧪 Test Cases</h2>
+      
+      <div class="instruction">
+        <strong>Test Duplicate Detection:</strong><br>
+        Try saving the same PDF link twice. You should see a "Duplicate Bookmark" notification.
+      </div>
+      
+      <div class="instruction">
+        <strong>Test Different Domains:</strong><br>
+        Save links from different domains (example.com, w3.org, etc.) and test domain search.
+      </div>
+      
+      <div class="instruction">
+        <strong>Test File Type Filtering:</strong><br>
+        Save various file types, then use the filter dropdown to show only PDFs or ZIPs.
+      </div>
+      
+      <div class="instruction">
+        <strong>Test Sorting:</strong><br>
+        Save multiple bookmarks and try different sort options (date, name, usage count).
+      </div>
+      
+      <div class="success">
+        <strong>✅ Extension Working?</strong><br>
+        If you can right-click links and see "Save Link as Bookmark", your extension is installed correctly!
+      </div>
+      
+      <div class="warning">
+        <strong>⚠️ Note:</strong><br>
+        Most of these links are example URLs and won't actually download files. They're just for testing the bookmark saving functionality.
+      </div>
+    </div>
+    
+    <!-- Additional Tips -->
+    <div class="section">
+      <h2>💡 Additional Tips</h2>
+      <div class="steps">
+        <ul style="list-style-type: none; margin-left: 0;">
+          <li>✨ <strong>Quick Access:</strong> Pin the extension icon to your toolbar for easy access</li>
+          <li>⌨️ <strong>Customize Shortcuts:</strong> Visit chrome://extensions/shortcuts to change keyboard shortcuts</li>
+          <li>💾 <strong>Regular Backups:</strong> Use the Export feature to backup your bookmarks regularly</li>
+          <li>🔍 <strong>Advanced Search:</strong> Search works on filename, domain, and tags</li>
+          <li>📊 <strong>Usage Tracking:</strong> Each time you open a bookmark, the usage count increases</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
