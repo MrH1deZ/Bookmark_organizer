@@ -492,7 +492,7 @@ This project is licensed under the MIT License.
 
 ## 🎉 Version History
 
-### v2.0.0 (Current)
+### v3.0.0 (Current)
 Complete feature overhaul with tags, folders, dark mode, bulk operations, statistics, and advanced search.
 
 ### v1.0.0
@@ -502,7 +502,7 @@ See [CHANGELOG.md](./docs/CHANGELOG.md) for detailed history.
 
 ---
 
-**Made with ❤️ for productivity enthusiasts**
+**Made with ❤️ for productivity enthusiasts By Mr.H1deZ**
 
 ### Performance
 - Optimized rendering for large collections
@@ -566,8 +566,8 @@ This project is provided as-is for personal and educational use.
 
 ## 🤝 Contributing
 
-Feel free to fork, modify, and improve this extension. If you add cool features, consider sharing them back!
-
+Made with ❤️ by Mr.H1deZ
+ 
 ## 📧 Support
 
 If you encounter issues or have suggestions, please open an issue on the project repository.
