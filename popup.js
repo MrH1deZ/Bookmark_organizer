@@ -19,7 +19,7 @@ const saveCurrentPageBtn = document.getElementById('saveCurrentPageBtn');
 const manageFoldersBtn = document.getElementById('manageFoldersBtn');
 const exportBtn = document.getElementById('exportBtn');
 const importBtn = document.getElementById('importBtn');
-const clearBtn = document.getElementById('clearBtn');
+// const clearBtn = document.getElementById('clearBtn');
 const fileInput = document.getElementById('fileInput');
 const statsBtn = document.getElementById('statsBtn');
 const settingsBtn = document.getElementById('settingsBtn');
@@ -1264,7 +1264,7 @@ function setupEventListeners() {
   manageFoldersBtn.addEventListener('click', showFoldersModal);
   exportBtn.addEventListener('click', showExportMenu);
   importBtn.addEventListener('click', () => fileInput.click());
-  clearBtn.addEventListener('click', clearAllBookmarks);
+//   clearBtn.addEventListener('click', clearAllBookmarks);
   statsBtn.addEventListener('click', showStatistics);
   settingsBtn.addEventListener('click', showSettings);
   darkModeToggle.addEventListener('click', toggleDarkMode);

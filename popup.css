@@ -123,10 +123,10 @@ body {
   transform: translateY(0);
 }
 
-#clearBtn {
+/* #clearBtn {
   background: #fee;
   color: #c33;
-}
+} */
 
 #clearBtn:hover {
   background: #fdd;
@@ -786,18 +786,21 @@ body {
 }
 
 .btn-secondary {
-  background: #f0f0f0;
-  color: #333;
+  background: #ee5454;
+  color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 16px 34px;
   border-radius: 6px;
   font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-secondary:hover {
-  background: #e0e0e0;
+  background: #ee5454;
+  /* background: #e0e0e0; */
+  transform: translateY(-1px);
 }
 
 /* Statistics */
