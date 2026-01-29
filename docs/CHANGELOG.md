@@ -1,12 +1,72 @@
-# 🎉 Smart Bookmark Organizer - Version 2.0 Release Notes
+# 📋 Changelog
 
-## Major Update: Feature-Complete Release!
+All notable changes to Smart Bookmark Organizer will be documented in this file.
 
-We've implemented ALL major features from the roadmap, transforming the extension into a fully-featured bookmark management powerhouse!
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
-## ✨ What's New in Version 2.0
+## [3.0.0] - 2026-01-29
+
+### 🎉 Major UI/UX Overhaul
+
+This release represents a complete redesign of the user experience with focus on modal-based workflows, visual folder organization, and context menu interactions.
+
+### ✨ Added
+
+#### Folder System Enhancements
+- **Folder Sidebar** - Visual left panel showing all folders with one-click filtering
+- **Folder Management Modal** - Create and delete folders with persistent storage
+- **Custom Folder Storage** - Folders stored in browser settings for persistence
+- **Dropdown Folder Selection** - Select folders from dropdown in edit modal (replaces text input)
+- **Save with Folder Modal** - Choose folder, edit title, add tags before saving any bookmark
+
+#### Context Menu Improvements
+- **Right-Click Save Modals** - Both "Save Link" and "Save Page" open popup with modal
+- **Bookmark Context Menu** - Right-click bookmarks for clean menu with Open, Edit, Copy, Delete
+- **Removed Visible Buttons** - Cleaner UI without overlapping action buttons on bookmarks
+
+#### Page Type Detection
+- **"Page" Classification** - Normal web pages now classified as "page" instead of "unknown"
+
+#### Dark Mode
+- **Complete Dark Mode Support** - Folder sidebar, modals, and all UI elements support dark mode
+- **Smooth Transitions** - All theme changes animate smoothly
+
+### 🔧 Changed
+- **Manifest Version** - Updated to 3.0.0
+- **Context Menu Behavior** - Opens popup with pre-filled modal instead of directly saving
+- **Edit Modal** - Folder input changed from text with datalist to select dropdown
+- **Folder Sidebar Styling** - Uses CSS classes instead of inline styles for theme support
+- **Author Attribution** - "Created by Mr.H1deZ" displayed in header
+
+### 🐛 Fixed
+- **Duplicate Variable Declarations** - Removed duplicate `saveTags` and `pendingBookmarkSave` declarations
+- **Database Name Mismatch** - Fixed background.js using 'BookmarkDB' vs popup using 'BookmarkOrganizerDB'
+- **Syntax Errors** - Resolved all syntax errors causing service worker failures
+- **Folder Theme Support** - Folder sidebar now properly adapts to light/dark modes
+- **Default Bookmark Display** - Fixed bookmarks not showing by default (changed folder filter from '' to undefined)
+
+### 🎨 UI/UX Improvements
+- **Modal-Based Workflow** - All save operations go through confirmation modal
+- **Visual Folder Organization** - Folder sidebar provides at-a-glance view of all folders
+- **Cleaner Bookmark Cards** - Removed overlapping buttons, context menu on right-click
+- **Responsive Context Menus** - Auto-position to stay on screen
+- **Active Folder Highlighting** - Clear visual indicator for selected folder
+
+### 📚 Documentation
+- **Updated README.md** - Comprehensive guide with v3.0.0 features and packaging instructions
+- **Created PACKAGING.md** - Complete guide for creating .crx, .xpi, and distributing extension
+- **Feature Documentation** - All new features documented with usage examples
+
+---
+
+## [2.0.0] - Previous Release
+
+### 🎉 Feature-Complete Release
+
+### ✨ Added
 
 ### 🏷️ Complete Tags System
 - **Add/Edit/Delete Tags** - Full tag management UI
